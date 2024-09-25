@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h2 id="curTime"></h2>
+</head>
+<body>
+    <script src="assets/js/script.js"></script>
+    <script>
+        let raf;
+
+        const df = new DateFormatter();
+
+        const curTime = document.querySelector('#curTime');
+
+        getNow();
+
+        function getNow(){
+            curTime.textContent = df.format('yyyy-MM-dd hh:mm:ss.ms');
+            raf = window.requestAnimationFrame(getNow);
+        }
+    </script>
+    
+</body>
+</html>
