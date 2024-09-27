@@ -1,5 +1,4 @@
 class DateFormatter{
-    
     format(fomatType, d, opt){
         this.date = d;
         if(d === undefined) this.date = new Date();
@@ -86,3 +85,49 @@ class DateFormatter{
 }
 
 
+
+class Scheduler{
+    constructor(){
+
+    }
+    /**
+     * 
+     * @param {String} time 00:00(24시 기준 0~23)
+     * @param {*} opt
+     */
+    go(callback, time, opt){
+        // time: 24:00
+        // if(time)
+        const day_1 = 1000 * 60 * 60 * 24;
+        const hour_1 = 1000 * 60 * 60;
+
+        const nowTime = new Date().getTime();
+
+        const settingTime = this.timeToMs(time);
+        const 나머지 = (nowTime + (hour_1 * 9)) % day_1;
+
+        console.log(settingTime);
+        console.log(나머지);
+
+        let timeoutDur = 0;
+
+        if(나머지 < settingTime) timeoutDur = settingTime - 나머지;
+
+        console.log(timeoutDur);
+
+        setTimeout(() => {
+            if(callback && typeof callback === 'function') callback();
+        }, timeoutDur)
+    }
+
+    timeToMs(time){
+        const hm = time.split(':');
+
+        if(hm.length !== 2) return;
+
+        const thisHour = +hm[0] * 1000 * 60 * 60;
+        const thisMinute = +hm[1] * 1000 * 60;
+
+        return thisHour + thisMinute;
+    }
+}

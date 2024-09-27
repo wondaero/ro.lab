@@ -21,6 +21,11 @@
             curTime.textContent = df.format('yyyy-MM-dd hh:mm:ss.ms');
             raf = window.requestAnimationFrame(getNow);
         }
+
+        const scd = new Scheduler();
+        scd.go(() => {
+            console.log(new Date());
+        }, '16:07');
     </script>
     
 </body>
